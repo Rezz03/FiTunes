@@ -1,5 +1,8 @@
 <resources>
     <string name="app_name">FiTunes</string>
+    <string name="group_name">Bobs Jog</string>
+    <string name="song_name">Here Comes the Sun</string>
+    <string name="song_author">The Beatles</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
 </resources>
