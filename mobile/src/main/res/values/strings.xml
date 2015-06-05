@@ -5,8 +5,10 @@
     <string name="song_author">The Beatles</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="heart_tracker">86 BPM</string>
+    <string name="step_tracker">1023 Steps</string>
 
     <color name="red">#FF0000</color>
     <color name="green">#76EE00</color>
-    <color name="tan">#EDE1D1</color>
+    <color name="gray">#D6D7D7</color>
 </resources>
