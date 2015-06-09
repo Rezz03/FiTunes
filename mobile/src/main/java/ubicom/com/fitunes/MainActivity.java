@@ -4,14 +4,18 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-
+import android.media.MediaPlayer;
 
 public class MainActivity extends ActionBarActivity {
 
+    public MediaPlayer mediaPlayer;//TODO Remove this when we implement a real music player activity. Messy, single file, and for testing only
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //TODO Remove this when we implement a real music player activity. Messy, single file, and for testing only
+        mediaPlayer = MediaPlayer.create(this, R.raw.song);
     }
 
 
