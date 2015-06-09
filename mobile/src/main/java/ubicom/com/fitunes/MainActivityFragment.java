@@ -47,13 +47,15 @@ public class MainActivityFragment extends Fragment{
     {
         //Todo Add Favorite Function on Click
         Toast.makeText(getActivity(), "Up Button Pressed!", Toast.LENGTH_LONG).show();
-        ((MainActivity) getActivity()).mediaPlayer.start();//TODO Remove this Temp Fundtion when we implement a real music player!
+        ((MainActivity) getActivity()).playNext();//TODO Remove this Temp Fundtion when we implement a real music player!
     }
 
     public void onButtonDown(View v)
     {
        //Todo Add Skip Function on Click
         Toast.makeText(getActivity(), "Down Button Pressed!", Toast.LENGTH_LONG).show();
-        ((MainActivity) getActivity()).mediaPlayer.pause();//TODO Remove this Temp Fundtion when we implement a real music player!
+        ((MainActivity) getActivity()).hate();//TODO Remove this Temp Fundtion when we implement a real music player!
     }
+
+
 }
