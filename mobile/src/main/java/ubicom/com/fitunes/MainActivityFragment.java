@@ -17,12 +17,13 @@ public class MainActivityFragment extends Fragment{
     public MainActivityFragment() {
     }
     View rootView;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         rootView = inflater.inflate(R.layout.fragment_main, container, false);
-
+        ((MainActivity) getActivity()).playNext();
         ImageButton buttonUp = (ImageButton) rootView.findViewById(R.id.buttonUp);
         buttonUp.setOnClickListener(new View.OnClickListener()
         {
@@ -47,7 +48,8 @@ public class MainActivityFragment extends Fragment{
     {
         //Todo Add Favorite Function on Click
         Toast.makeText(getActivity(), "Up Button Pressed!", Toast.LENGTH_LONG).show();
-        ((MainActivity) getActivity()).playNext();//TODO Remove this Temp Fundtion when we implement a real music player!
+        ((MainActivity) getActivity()).addToFavourites();
+        //TODO Remove this Temp Fundtion when we implement a real music player!
     }
 
     public void onButtonDown(View v)
