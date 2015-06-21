@@ -20,6 +20,10 @@
             android:name=".GroupActivity"
             android:label="@string/app_name" >
         </activity>
+        <activity
+            android:name=".SummaryActivity"
+            android:label="@string/title_activity_summary" >
+        </activity>
     </application>
 
 </manifest>

@@ -1,5 +1,6 @@
 package ubicom.com.fitunes;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -21,7 +22,7 @@ public class MainActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        favourites = new ArrayList<Integer>();
+            favourites = new ArrayList<Integer>();
         //TODO Remove this when we implement a real music player activity. Messy, single file, and for testing only
         mediaPlayer = MediaPlayer.create(this, R.raw.song);
         mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener(){
@@ -68,6 +69,12 @@ public class MainActivity extends ActionBarActivity {
 
     }
 
+    public void showSummary() {
+        mediaPlayer.stop();
+        Intent summaryIntent = new Intent(MainActivity.this, SummaryActivity.class);
+        summaryIntent.putIntegerArrayListExtra("songs", (ArrayList<Integer>)favourites);
+        MainActivity.this.startActivity(summaryIntent);
+    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.

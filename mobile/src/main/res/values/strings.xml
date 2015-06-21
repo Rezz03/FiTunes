@@ -24,4 +24,5 @@
     <color name="green">#76EE00</color>
     <color name="gray">#D6D7D7</color>
     <string name="title_activity_group">GroupActivity</string>
+    <string name="title_activity_summary">SummaryActivity</string>
 </resources>
