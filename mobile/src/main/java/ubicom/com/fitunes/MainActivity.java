@@ -56,7 +56,6 @@ public class MainActivity extends ActionBarActivity {
 
     //Song has been downvoted mutes for remainder of song
     public void hate() {
-        favourites.remove(nextSong--);
         nextSong++;
         if(nextSong < songs.length){
             mediaPlayer.release();
