@@ -1,5 +1,6 @@
 package ubicom.com.fitunes;
 
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.app.ActionBarActivity;
@@ -7,6 +8,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.media.MediaPlayer;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,15 +16,33 @@ import java.util.List;
 public class MainActivity extends ActionBarActivity {
 
     int[] songs = {R.raw.song, R.raw.song2, R.raw.song3};//TODO Remove after Milestone 2. Temporary (static) playlist of songs.
+    String[] songNames = {"Here Comes the Sun", "Maxwell's Silver Hammer", "The End"};
     int nextSong = 1;
-    List<Integer> favourites;                           //TODO change identifying type to match song id
+    List<String> favourites;                           //TODO change identifying type to match song id
 
     public MediaPlayer mediaPlayer;//TODO Remove this when we implement a real music player activity. Messy, single file, and for testing only
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-            favourites = new ArrayList<Integer>();
+
+        /* This gets the intent from the the Group activity and sets the name of the group
+        *  based on which one was selected. If no group is selected, the user is told.
+        */
+        TextView tv = (TextView) findViewById(R.id.group_tv_id);
+        Bundle getGroupNameExtra = getIntent().getExtras();
+        if (getGroupNameExtra != null)
+        {
+            tv.setText(getGroupNameExtra.getString("GroupName"));
+        }
+        else
+        {
+            String noGroupSelected = "No Group Selected!";
+
+            tv.setText(noGroupSelected);
+        }
+
+            favourites = new ArrayList<String>();
         //TODO Remove this when we implement a real music player activity. Messy, single file, and for testing only
         mediaPlayer = MediaPlayer.create(this, R.raw.song);
         mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener(){
@@ -47,7 +67,7 @@ public class MainActivity extends ActionBarActivity {
      * Adds current song to favourites list
      */
     public void addToFavourites(){
-        favourites.add(nextSong--);
+        favourites.add(songNames[nextSong--]);
     }
 
     //This Method Plays the Next Song in the Playlist
@@ -71,8 +91,8 @@ public class MainActivity extends ActionBarActivity {
     public void showSummary() {
         mediaPlayer.stop();
         Intent summaryIntent = new Intent(MainActivity.this, SummaryActivity.class);
-        summaryIntent.putIntegerArrayListExtra("songs", (ArrayList<Integer>)favourites);
-        MainActivity.this.startActivity(summaryIntent);
+        summaryIntent.putStringArrayListExtra("songs", (ArrayList<String>)favourites);
+        startActivity(summaryIntent);
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

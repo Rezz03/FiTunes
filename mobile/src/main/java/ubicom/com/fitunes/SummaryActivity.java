@@ -15,14 +15,14 @@ import java.util.List;
 public class SummaryActivity extends ActionBarActivity {
 
     int[] songs = {R.raw.song, R.raw.song2, R.raw.song3};   //TODO Remove after Milestone 2. Temporary (static) playlist of songs.
-    List<Integer> favourites;   //TODO change identifying type to match song id
+    List<String> favourites;   //TODO change identifying type to match song id
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_summary);
-        favourites = new ArrayList<Integer>();
-        favourites = getIntent().getExtras().getIntegerArrayList("songs");
+        favourites = new ArrayList<String>();
+        favourites = getIntent().getExtras().getStringArrayList("songs");
 
         if (favourites.isEmpty()) {
             Toast.makeText(this, "No favourite songs", Toast.LENGTH_LONG).show();
@@ -33,7 +33,7 @@ public class SummaryActivity extends ActionBarActivity {
 
             String[] values = new String[favourites.size()];
             for (int i = 0; i < favourites.size(); i++) {
-                values[i] = getResources().getResourceName(songs[favourites.get(i)]);
+                values[i] = favourites.get(i);
             }
 
             ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,

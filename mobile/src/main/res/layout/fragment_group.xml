@@ -10,14 +10,14 @@
         android:gravity="center"
         style="@android:style/TextAppearance.Large"
         android:textStyle="italic"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:id="@+id/group_activity_title" />
 
-    <ListView android:id="@+id/groupsList" android:layout_width="fill_parent"
-        android:gravity="center"
-        style="@android:style/TextAppearance.Large"
-        android:textStyle="italic"
-        android:entries="@array/groups_array"
-        android:layout_height="match_parent" />
+    <ListView
+        android:id="@+id/groupsList"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:entries="@array/groups_array"/>
 
 </LinearLayout>
 
