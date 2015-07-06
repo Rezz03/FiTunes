@@ -24,7 +24,7 @@ public class MainActivityFragment extends Fragment{
                              Bundle savedInstanceState) {
 
         rootView = inflater.inflate(R.layout.fragment_main, container, false);
-        ((MainActivity) getActivity()).playNext();
+        //((MainActivity) getActivity()).playAudio();
         ImageButton buttonUp = (ImageButton) rootView.findViewById(R.id.buttonUp);
         buttonUp.setOnClickListener(new View.OnClickListener() {
             @Override

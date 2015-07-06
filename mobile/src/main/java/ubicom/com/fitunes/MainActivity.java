@@ -1,8 +1,11 @@
 package ubicom.com.fitunes;
 
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
+import android.media.AudioManager;
 import android.net.Uri;
+import android.os.Build;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -10,6 +13,7 @@ import android.view.MenuItem;
 import android.media.MediaPlayer;
 import android.widget.TextView;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,10 +21,12 @@ public class MainActivity extends ActionBarActivity {
 
     int[] songs = {R.raw.song, R.raw.song2, R.raw.song3};//TODO Remove after Milestone 2. Temporary (static) playlist of songs.
     String[] songNames = {"Here Comes the Sun", "Maxwell's Silver Hammer", "The End"};
-    int nextSong = 1;
+    int songIndex = 0;
     List<String> favourites;                           //TODO change identifying type to match song id
+    boolean dislike = false;
 
     public MediaPlayer mediaPlayer;//TODO Remove this when we implement a real music player activity. Messy, single file, and for testing only
+    @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,15 +48,9 @@ public class MainActivity extends ActionBarActivity {
             tv.setText(noGroupSelected);
         }
 
-            favourites = new ArrayList<String>();
+        favourites = new ArrayList<String>();
         //TODO Remove this when we implement a real music player activity. Messy, single file, and for testing only
-        mediaPlayer = MediaPlayer.create(this, R.raw.song);
-        mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener(){
-            @Override
-            public void onCompletion(MediaPlayer mp) {
-                playNext();
-            }
-        });
+
 
     }
 
@@ -60,30 +60,41 @@ public class MainActivity extends ActionBarActivity {
      */
     protected void onStart(){
         super.onStart();
-        mediaPlayer.start();
+        playAudio();
     }
 
     /**
      * Adds current song to favourites list
      */
+    @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     public void addToFavourites(){
-        favourites.add(songNames[nextSong--]);
+        favourites.add(songNames[songIndex]);
     }
 
     //This Method Plays the Next Song in the Playlist
-    public void playNext() {
+    public void playAudio() {
+        dislike = false;
+        mediaPlayer = MediaPlayer.create(this, songs[songIndex]);
+        mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mp) {
+                mediaPlayer.stop();
+                songIndex++;
+                playAudio();
+            }
+        });
+        mediaPlayer.start();
+        mediaPlayer.setVolume(1, 1);
     }
 
     //Song has been downvoted mutes for remainder of song
     public void hate() {
-        nextSong++;
-        if(nextSong < songs.length){
-            mediaPlayer.release();
-            mediaPlayer = MediaPlayer.create(this, songs[nextSong]);
-            mediaPlayer.setVolume(1, 1);
-            mediaPlayer.start();
+
+        if(dislike){
+            mediaPlayer.setVolume(0, 0);
         } else {
-            mediaPlayer.setVolume(0,0);
+            mediaPlayer.setVolume(0.5f,0.5f);
+            dislike = true;
         }
 
     }
